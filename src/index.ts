@@ -15,6 +15,7 @@ import ApiError from './errors/api'
 // routers
 
 import userRouter from './controllers/user'
+import contractsRouter from './controllers/contaracts'
 
 // app
 
@@ -59,6 +60,10 @@ app.use( '/api', async ( req, res, next ) => {
 app.get( '/api/status', ( req, res ) => {
 	res.send( { status : 'available', user_id : req.user_id } )
 } )
+
+// routes
+
+app.use( '/api/contracts', contractsRouter )
 
 // errors middleware
 
