@@ -2,6 +2,11 @@
 
 import express, { NextFunction, Request, Response } from 'express'
 import 'dotenv/config'
+import cors from 'cors'
+
+// imports
+
+import db from './db'
 
 // errors
 
@@ -17,30 +22,42 @@ const app = express()
 
 app.use( express.json() )
 
+// temporary
+
+app.use( cors() )
+
 // check token
 
-app.use( '/api', ( req, res, next ) => {
+app.use( '/api/user', userRouter )
 
-	const token = String( req.query[ 'token' ] )
+// token must be passed
+
+app.use( '/api', async ( req, res, next ) => {
+
+	const token = req.headers.authorization
 
 	if ( !token )
-		return next( new ApiError( 400, 'Token required' ) )
+		return next( new ApiError( 400, 'Token must be passed' ) )
 
-	// TODO : check token in db
+	const user = await db( 'tokens' )
+		.first( 'user_id' )
+		.where( {
+			token
+		} )
+
+	if ( !user )
+		return next( new ApiError( 403, 'Invalid token' ) )
 
 	req.token = token
+	req.user_id = user.user_id
 	next()
 
 } )
 
-// TODO : use partial router system
-
-app.use( '/user', userRouter )
-
 // status api
 
 app.get( '/api/status', ( req, res ) => {
-	res.send( { status : 'available' } )
+	res.send( { status : 'available', user_id : req.user_id } )
 } )
 
 // errors middleware

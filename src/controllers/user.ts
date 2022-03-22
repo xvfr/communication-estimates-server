@@ -1,8 +1,8 @@
 import express from 'express'
 import { randomBytes } from 'crypto'
 
-import db from '../db'
 import ApiError from '../errors/api'
+import db from '../db'
 
 const userRouter = express.Router()
 
@@ -26,9 +26,23 @@ userRouter.post( '/auth', async ( req, res, next ) => {
 	if ( !user )
 		return next( new ApiError( 401, 'Invalid username or password' ) )
 
-	const token = randomBytes( 120 ).toString( 'hex' )
+	const token = randomBytes( 60 ).toString( 'hex' )
 
-	res.send( { token, user_id : user.user_id } )
+	try {
+
+		await db( 'tokens' )
+			.insert( {
+				user_id : user.user_id,
+				token
+			} )
+
+		res.send( { token, user_id : user.user_id } )
+
+	} catch ( e ) {
+
+		return next( new ApiError( 500, e instanceof SyntaxError && e.message || 'Internal server error' ) )
+
+	}
 
 } )
 

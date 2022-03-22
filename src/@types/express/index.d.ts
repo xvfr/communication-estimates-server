@@ -1,5 +1,10 @@
 declare module Express {
+
 	interface Request {
-		token? : string
+
+		token? : string,
+		user_id? : number
+
 	}
+
 }
