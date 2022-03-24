@@ -17,6 +17,8 @@ import ApiError from './errors/api'
 import userRouter from './controllers/user'
 import contractsRouter from './controllers/contaracts'
 import amortizationsRouter from './controllers/amortizations'
+import customersRouter from './controllers/customers'
+import contractorsRouter from './controllers/contractors'
 
 // app
 
@@ -66,6 +68,8 @@ app.get( '/api/status', ( req, res ) => {
 
 app.use( '/api/contracts', contractsRouter )
 app.use( '/api/amortizations', amortizationsRouter )
+app.use( '/api/customers', customersRouter )
+app.use( '/api/contractors', contractorsRouter )
 
 // errors middleware
 
