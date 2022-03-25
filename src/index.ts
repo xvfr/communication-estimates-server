@@ -83,7 +83,7 @@ app.use( ( err : ApiError, req : Request, res : Response, next : NextFunction ) 
 
 app.use( ( req, res ) => {
 	res.status( 404 )
-	res.send( { error : 'Not found' } )
+	res.send( { error : 'Страница не найдена' } )
 } )
 
 // start server

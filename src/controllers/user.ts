@@ -24,7 +24,7 @@ userRouter.post( '/auth', async ( req, res, next ) => {
 		} )
 
 	if ( !user )
-		return next( new ApiError( 401, 'Invalid username or password' ) )
+		return next( new ApiError( 403, 'Invalid username or password' ) )
 
 	const token = randomBytes( 60 ).toString( 'hex' )
 
