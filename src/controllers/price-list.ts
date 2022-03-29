@@ -4,7 +4,7 @@ import ApiError from '../errors/api'
 
 const priceListRouter = express.Router()
 
-priceListRouter.get( '/', async ( req, res, next ) => {
+priceListRouter.get( '/', async ( req, res ) => {
 
 	const list = await db( 'price_list' )
 		.select( 'price_id', 'title', 'price' )
@@ -32,7 +32,7 @@ priceListRouter.post( '/', async ( req, res, next ) => {
 		} )
 
 	res.send( {
-		inserted_id : inserted_id
+		inserted_id
 	} )
 
 } )
