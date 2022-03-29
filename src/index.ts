@@ -21,6 +21,7 @@ import customersRouter from './controllers/customers'
 import contractorsRouter from './controllers/contractors'
 import priceListRouter from './controllers/price-list'
 import equipmentsRouter from './controllers/equipments'
+import expenditureItemsRouter from './controllers/expenditure-items'
 
 // app
 
@@ -74,6 +75,7 @@ app.use( '/api/customers', customersRouter )
 app.use( '/api/contractors', contractorsRouter )
 app.use( '/api/equipments', equipmentsRouter )
 app.use( '/api/price-list', priceListRouter )
+app.use( '/api/expenditure-items', expenditureItemsRouter )
 
 // errors middleware
 
