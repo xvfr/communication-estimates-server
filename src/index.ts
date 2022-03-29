@@ -20,6 +20,7 @@ import amortizationsRouter from './controllers/amortizations'
 import customersRouter from './controllers/customers'
 import contractorsRouter from './controllers/contractors'
 import priceListRouter from './controllers/price-list'
+import equipmentsRouter from './controllers/equipments'
 
 // app
 
@@ -71,6 +72,7 @@ app.use( '/api/contracts', contractsRouter )
 app.use( '/api/amortizations', amortizationsRouter )
 app.use( '/api/customers', customersRouter )
 app.use( '/api/contractors', contractorsRouter )
+app.use( '/api/equipments', equipmentsRouter )
 app.use( '/api/price-list', priceListRouter )
 
 // errors middleware
