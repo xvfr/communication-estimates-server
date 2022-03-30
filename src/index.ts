@@ -70,12 +70,12 @@ app.get( '/api/status', ( req, res ) => {
 // routes
 
 app.use( '/api/contracts', contractsRouter )
-app.use( '/api/amortizations', amortizationsRouter )
 app.use( '/api/customers', customersRouter )
 app.use( '/api/contractors', contractorsRouter )
 app.use( '/api/equipments', equipmentsRouter )
 app.use( '/api/price-list', priceListRouter )
 app.use( '/api/expenditure-items', expenditureItemsRouter )
+app.use( '/api/amortizations', amortizationsRouter )
 
 // errors middleware
 
