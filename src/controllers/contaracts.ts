@@ -9,11 +9,6 @@ contractsRouter.get( '/', async ( req, res, next ) => {
 		limit = Number( req.query.limit ) || 100,
 		offset = Number( req.query.offset ) || 0
 
-	// const items = await db( 'contracts' )
-	// 	.select( 'contract_id', 'name', 'created_date' )
-	// 	.limit( limit )
-	// 	.offset( offset )
-
 	const items = await db( 'contracts as c' )
 		.select( 'c.contract_id', 'c.name', 'c.created_date', 'cu.name as customer_name', 'cu.customer_id as customer_id', 'co.name as contractor_name', 'co.contractor_id as contractor_id' )
 		.leftJoin( 'contracts_customers as ccu', 'c.contract_id', 'ccu.contract_id' )
